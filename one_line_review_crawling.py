@@ -24,35 +24,30 @@ driver = webdriver.Chrome(service=s)
 url = "http://www.yes24.com/24/Category/BestSeller"
 driver.get(url)
 # driver.maximize_window()
-# '가정 살림', '경제 경영', '만화/라이트노벨', '수험서 자격증', '소실/시/희곡', '에세이', '여행', '유아', '자기계발', 'IT 모바일'
-# Genre = [1, 3, 6, 8, 9, 11, 12, 15, 18, 24]
+# '가정 살림', '경제 경영', '만화/라이트노벨', '수험서 자격증', '소실/시/희곡',
+# '에세이', '여행', '유아', '자기계발', 'IT 모바일'
 
-# books = [1, 5, 7, 9, 11, 13, 15, 17, 19]
-Genre = [1]
-
-books = [1, 5]
-titles = [1, 5]
+Genre = [1, 3, 6, 8, 9, 11, 12, 15, 18, 24]
 
 review = []
 
 
 # 경제/ 경영 탭 클릭
 for i in Genre:
-    driver.find_element(By.XPATH, f'/html/body/div/div[2]/div[1]/div[1]/ul/li[1]/ul/li[{i}]/a').click()
-    time.sleep(2)
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable(
+        (By.XPATH, f'/html/body/div/div[2]/div[1]/div[1]/ul/li[1]/ul/li[{i}]/a'))).click()
     for page in range(1, 3):
         driver.find_element(By.XPATH, f'/html/body/div/div[2]/div[2]/div[3]/div[1]/div[1]/p/a[2]').click()
         driver.find_element(By.XPATH, f'/html/body/div/div[2]/div[2]/div[3]/div[1]/div[1]/p/a[{page}]').click()
         time.sleep(3)
-        for title in titles:
+        for title in range(1, 41, 3):
             title1 = driver.find_element(By.XPATH, f'//*[@id="category_layout"]/tbody/tr[{title}]/td[3]/p[1]/a[1]').text
             print(f'**********************{title1}**********************')
-            for book in books:
-                title = driver.find_element(By.XPATH, f'//*[@id="category_layout"]/tbody/tr[{book}]/td[3]/p[1]/a[1]').text
+            for book in range(1, 41, 3):
                 driver.find_element(By.XPATH,
-                                    f'/html/body/div/div[2]/div[2]/table/tbody/tr[{book}]/td[2]/div/a[1]/img').click()
+                                    f'//*[@id="category_layout"]/tbody/tr[{book}]/td[3]/p[1]/a[1]').click()
                 time.sleep(3)
-                for page1 in range(1, 10):
+                for page1 in range(1, 12):
                     try:
                         driver.find_element(By.XPATH, f'//*[@id="infoset_oneCommentList"]/div[2]/div[1]/div/a[{page1}]').click()
                         time.sleep(2)
@@ -64,10 +59,10 @@ for i in Genre:
                             except:
                                 break
                     except:
-                        break
+                        continue
 
+                driver.back()
 
-            driver.back()
 
     '''
     for 페이지 in 전체페이지:
