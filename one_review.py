@@ -24,11 +24,11 @@ url = "http://www.yes24.com/24/Category/BestSeller"
 driver.get(url)
 
 '''
-경제/경영 3, 만화/라이트노벨 6, 소설/시/희곡 8, 어린이 10, 에세이 11, 여행 12, 
+가졍살림 1 - 2~9, 경제/경영 3 - 1~9, 만화/라이트노벨 6, 소설/시/희곡 8, 어린이 10, 에세이 11, 여행 12, 
 유아 15, 자기계발 18, IT모바일 24
-, '3', '6', '8', '10', '11', '12', '15', '18', '24'
+'1', '3', '6', '8', '10', '11', '12', '15', '18', '24'
 '''
-categoreis = ['1']
+categoreis = ['8', '10', '11', '12', '15', '18', '24']
 list0 = []
 list1 = []
 list2 = []
@@ -38,6 +38,7 @@ list5 = []
 list6 = []
 list7 = []
 list8 = []
+list9 = []
 
 # 장르 클릭
 for category in categoreis:
@@ -62,16 +63,20 @@ for category in categoreis:
                                     list1.append({title: review})
                                 elif category == '6':
                                     list2.append({title: review})
-                                elif category == '10':
+                                elif category == '8':
                                     list3.append({title: review})
-                                elif category == '11':
+                                elif category == '10':
                                     list4.append({title: review})
-                                elif category == '12':
+                                elif category == '11':
                                     list5.append({title: review})
-                                elif category == '15':
+                                elif category == '12':
                                     list6.append({title: review})
-                                elif category == '18':
+                                elif category == '15':
                                     list7.append({title: review})
+                                elif category == '18':
+                                    list8.append({title: review})
+                                elif category == '24':
+                                    list9.append({title: review})
                             except:
                                 break
                     except:
@@ -89,22 +94,25 @@ for category in categoreis:
     elif category == '6':
         review_list = pd.Series(list2)
         review_list.to_csv(f'save/reviews/만화라이트노벨.csv', encoding='utf-8', index=False)
-    elif category == '10':
+    elif category == '8':
         review_list = pd.Series(list3)
+        review_list.to_csv(f'save/reviews/소설시희곡.csv', encoding='utf-8', index=False)
+    elif category == '10':
+        review_list = pd.Series(list4)
         review_list.to_csv(f'save/reviews/어린이.csv', encoding='utf-8', index=False)
     elif category == '11':
-        review_list = pd.Series(list4)
+        review_list = pd.Series(list5)
         review_list.to_csv(f'save/reviews/에세이.csv', encoding='utf-8', index=False)
     elif category == '12':
-        review_list = pd.Series(list5)
+        review_list = pd.Series(list6)
         review_list.to_csv(f'save/reviews/여행.csv', encoding='utf-8', index=False)
     elif category == '15':
-        review_list = pd.Series(list6)
+        review_list = pd.Series(list7)
         review_list.to_csv(f'save/reviews/유아.csv', encoding='utf-8', index=False)
     elif category == '18':
-        review_list = pd.Series(list7)
+        review_list = pd.Series(list8)
         review_list.to_csv(f'save/reviews/자기계발.csv', encoding='utf-8', index=False)
     elif category == '24':
-        review_list = pd.Series(list8)
+        review_list = pd.Series(list9)
         review_list.to_csv(f'save/reviews/IT모바일.csv', encoding='utf-8', index=False)
 

@@ -32,20 +32,21 @@ Genre = [1, 3, 6, 8, 9, 11, 12, 15, 18, 24]
 review = []
 
 
+
 # 경제/ 경영 탭 클릭
 for i in Genre:
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable(
         (By.XPATH, f'/html/body/div/div[2]/div[1]/div[1]/ul/li[1]/ul/li[{i}]/a'))).click()
-    for page in range(1, 3):
+    for page in range(3, 4):
         driver.find_element(By.XPATH, f'/html/body/div/div[2]/div[2]/div[3]/div[1]/div[1]/p/a[2]').click()
         driver.find_element(By.XPATH, f'/html/body/div/div[2]/div[2]/div[3]/div[1]/div[1]/p/a[{page}]').click()
         time.sleep(3)
-        for title in range(1, 41, 3):
+        for title in range(1, 40, 2):
             title1 = driver.find_element(By.XPATH, f'//*[@id="category_layout"]/tbody/tr[{title}]/td[3]/p[1]/a[1]').text
             print(f'**********************{title1}**********************')
-            for book in range(1, 41, 3):
+            for book in range(1, 40, 2):
                 driver.find_element(By.XPATH,
-                                    f'//*[@id="category_layout"]/tbody/tr[{book}]/td[3]/p[1]/a[1]').click()
+                                    f'/html/body/div/div[2]/div[2]/table/tbody/tr[{book}]/td[2]/div/a[1]/img').click()
                 time.sleep(3)
                 for page1 in range(1, 12):
                     try:
